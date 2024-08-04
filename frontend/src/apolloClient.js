@@ -2,8 +2,10 @@ import { ApolloClient, InMemoryCache, createHttpLink, ApolloLink } from '@apollo
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: `${apiUrl}/graphql`,
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -22,7 +24,7 @@ const errorLink = onError(({ graphQLErrors, networkError, operation, forward }) 
       if (err.extensions.code === 'UNAUTHENTICATED') {
         const refreshToken = localStorage.getItem('refreshToken');
         if (refreshToken) {
-          return fetch('http://localhost:4000/refresh_token', {
+          return fetch(`${apiUrl}/refresh_token`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
