@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "id": "1",
+    "title": "Test Recipe",
+    "ingredients": "Test Ingredients",
+    "instructions": "Test Instructions",
+    "category": "Test Category",
+    "date": "2024-08-03",
+    "userId": "2"
+  }
+]
