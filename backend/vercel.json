@@ -12,6 +12,6 @@
         "dest": "server.js"
       }
     ],
-    "includeFiles": ["recipes.json", "users.json"]
+    "includeFiles": ["data/users.json", "data/recipes.json"]
   }
   

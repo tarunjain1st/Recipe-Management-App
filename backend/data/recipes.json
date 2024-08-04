@@ -7,5 +7,14 @@
     "category": "Test Category",
     "date": "2024-08-03",
     "userId": "2"
+  },
+  {
+    "id": "2",
+    "title": "bkbjk",
+    "ingredients": "bkjbk",
+    "instructions": "bkjbk",
+    "category": "lkn",
+    "date": "2024-08-04",
+    "userId": "2"
   }
 ]
