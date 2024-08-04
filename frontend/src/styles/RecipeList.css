@@ -1,0 +1,128 @@
+/* src/styles/RecipeList.css */
+
+.recipe-list-container {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.recipe-list-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.recipe-list-navbar-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.recipe-list-nav-button {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.recipe-list-nav-button:hover {
+  background-color: #0056b3;
+}
+
+.recipe-list-page-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin: 20px 0;
+}
+
+.recipe-list-filter-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.recipe-list-filter-input, .recipe-list-filter-select {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+.recipe-list-filter-input:focus, .recipe-list-filter-select:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.recipe-list-filter-input::placeholder {
+  color: #aaa;
+}
+
+.recipe-list-details-box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.recipe-list-actions {
+  display: block;
+}
+
+.recipe-list-button {
+  text-decoration: none;
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.view-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.edit-button {
+  background-color: #ffc107;
+  color: wheat;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.recipe-list-button:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.view-button:hover {
+  background-color: #218838;
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}

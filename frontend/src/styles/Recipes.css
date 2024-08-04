@@ -1,0 +1,47 @@
+/* src/styles/Recipes.css */
+
+.recipes-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.recipes-container h2 {
+  margin-top: 0;
+  font-size: 28px;
+  color: #333;
+}
+
+.recipes-container .recipe-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-card h3 {
+  margin-top: 0;
+  font-size: 22px;
+  color: #333;
+}
+
+.recipe-card p {
+  margin: 10px 0;
+  color: #555;
+}
+
+.recipe-card button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.recipe-card button:hover {
+  background-color: #0056b3;
+}

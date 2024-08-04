@@ -1,0 +1,118 @@
+/* src/styles/RecipeDetails.css */
+
+.recipe-details-container {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.recipe-details-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 5.5px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.recipe-details-navbar-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.recipe-details-nav-button {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.recipe-details-nav-button:hover {
+  background-color: #0056b3;
+}
+
+.recipe-details-page-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin: 20px 0;
+}
+
+.recipe-details-box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.recipe-details-row {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.recipe-details-label {
+  font-weight: bold;
+  color: #555;
+  width: 200px;
+}
+
+.recipe-details-value {
+  color: #333;
+}
+
+.recipe-details-list {
+  padding-left: 20px;
+}
+
+.recipe-details-list-item {
+  margin-bottom: 5px;
+}
+
+.recipe-details-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.recipe-details-action-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.edit-button {
+  background-color: #ffc107;
+  color: white;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.recipe-details-action-button:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.edit-button:hover {
+  background-color: #e0a800;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
