@@ -10,8 +10,8 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 
 // File paths for local JSON database
-const usersFilePath = path.join(__dirname, 'data', 'users.json');
-const recipesFilePath = path.join(__dirname, 'data', 'recipes.json');
+const usersFilePath = path.join(process.cwd(), 'data', 'users.json');
+const recipesFilePath = path.join(process.cwd(), 'data', 'recipes.json');
 
 // Load initial data from JSON files
 const loadData = (filePath) => {

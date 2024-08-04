@@ -4,5 +4,23 @@
     "username": "testuser",
     "email": "testuser@example.com",
     "password": "securepassword"
+  },
+  {
+    "id": "2",
+    "username": "s1",
+    "email": "s1@wfws.adw",
+    "password": "$2b$10$lvcwVmtjRrahesZJRX1i8OIjv3jl4J4o6Me2Csb10jtJDICFV9zDm"
+  },
+  {
+    "id": "3",
+    "username": "jjkbkj",
+    "email": "bjkhjkh@Hkj.da",
+    "password": "$2b$10$puuUqLN0/z3KdKVNbH095Of/d/9sh24u5A7E.dkTfYbglIIKuD.kq"
+  },
+  {
+    "id": "4",
+    "username": "e",
+    "email": "ser@eample.com",
+    "password": "$2b$10$w/bkSJoMKtMefJrLobqISeQ/35oDAz90DOQtbVli9b7w/fscVCM8i"
   }
 ]
