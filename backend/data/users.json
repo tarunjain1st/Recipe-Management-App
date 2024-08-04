@@ -1,0 +1,128 @@
+[
+  {
+    "id": "1",
+    "username": "test",
+    "email": "testuser@example.com",
+    "password": "s"
+  },
+  {
+    "id": "2",
+    "username": "testuser",
+    "email": "testuser@example.com",
+    "password": "securepassword"
+  },
+  {
+    "id": "3",
+    "username": "test12",
+    "email": "testuser@edxample.com",
+    "password": "testpassword"
+  },
+  {
+    "id": "4",
+    "username": "testt",
+    "email": "tttsu@ne.co",
+    "password": "t"
+  },
+  {
+    "id": "5",
+    "username": "jagjh",
+    "email": "jkjk@kj.sc",
+    "password": "nn"
+  },
+  {
+    "id": "6",
+    "username": "tt",
+    "email": "t@t.t",
+    "password": "t"
+  },
+  {
+    "id": "7",
+    "username": "hello",
+    "email": "hello@edf.ca",
+    "password": "hello"
+  },
+  {
+    "id": "8",
+    "username": "f",
+    "email": "f@d.s",
+    "password": "f"
+  },
+  {
+    "id": "9",
+    "username": "fe",
+    "email": "fe@gu.ax",
+    "password": "fe"
+  },
+  {
+    "id": "10",
+    "username": "tests",
+    "email": "testuser@eample.com",
+    "password": "testpassword"
+  },
+  {
+    "id": "11",
+    "username": "e",
+    "email": "ser@eample.com",
+    "password": "e"
+  },
+  {
+    "id": "12",
+    "username": "sa",
+    "email": "sda@sfc.com",
+    "password": "sa"
+  },
+  {
+    "id": "13",
+    "username": "m",
+    "email": "m@m.n",
+    "password": "m"
+  },
+  {
+    "id": "14",
+    "username": "d",
+    "email": "d@d.d",
+    "password": "d"
+  },
+  {
+    "id": "15",
+    "username": "a1",
+    "email": "a1@s.cs",
+    "password": "$2b$10$dW7k12Xr4q0uJlkvMJdeTumQ0sfBQVnyFM.3jSkoKkzIse0rE5Yce"
+  },
+  {
+    "id": "16",
+    "username": "a",
+    "email": "a@cs.c",
+    "password": "$2b$10$YzcBF5KI/9v1iFmBPYcx4O6aVcooMsIkjpxJGc5Ga.igHKZBHxIsO"
+  },
+  {
+    "id": "17",
+    "username": "s1",
+    "email": "s1@cs.s",
+    "password": "$2b$10$B1MaPxIoly.F0QNlQ0HcO.r9bEijsWImdw5EYeX5WSetL45Y5VSS6"
+  },
+  {
+    "id": "18",
+    "username": "test1",
+    "email": "test@stw.cas",
+    "password": "$2b$10$mD9/wL9bC9uG9T0stnPAl.BQvpZNCiglDXFQa./63640M51.ziy7i"
+  },
+  {
+    "id": "19",
+    "username": "testtt",
+    "email": "testuguk@jhghj.xs",
+    "password": "$2b$10$GhhGrJ9fGgPVI3mLqK8kPeLmcrjO62B6ENSd/rkk1fZz6mEhnQzjK"
+  },
+  {
+    "id": "20",
+    "username": "teayfduy",
+    "email": "afe@wadca.dq",
+    "password": "$2b$10$E/zi/UpUdqVOW37B8yXbgOcWrVX1icuDMzYpiTLdQGaRt6LuT4ADu"
+  },
+  {
+    "id": "21",
+    "username": "testw",
+    "email": "tet@jgjd.sd",
+    "password": "$2b$10$3cBcjmZnyxCS56PoaiuV3.cROPlsPRbaCK7RxAP0HkppfsNvGtLdi"
+  }
+]
