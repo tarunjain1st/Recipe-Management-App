@@ -4,25 +4,33 @@ const { ApolloServer, gql, AuthenticationError } = require('apollo-server-expres
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
-const fs = require('fs');
-const path = require('path');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 
-// File paths for local JSON database
-const usersFilePath = path.join(process.cwd(), 'data', 'users.json');
-const recipesFilePath = path.join(process.cwd(), 'data', 'recipes.json');
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Could not connect to MongoDB', err));
 
-// Load initial data from JSON files
-const loadData = (filePath) => {
-  if (fs.existsSync(filePath)) {
-    return JSON.parse(fs.readFileSync(filePath));
-  }
-  return [];
-};
+// Define Mongoose Schemas and Models
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true }
+});
 
-let users = loadData(usersFilePath);
-let recipes = loadData(recipesFilePath);
+const recipeSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  ingredients: { type: String, required: true },
+  instructions: { type: String, required: true },
+  category: { type: String, required: true },
+  date: { type: String, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+});
+
+const User = mongoose.model('User', userSchema);
+const Recipe = mongoose.model('Recipe', recipeSchema);
 
 // Define schema
 const typeDefs = gql`
@@ -63,66 +71,63 @@ const typeDefs = gql`
 // Define resolvers
 const resolvers = {
   Query: {
-    getRecipes: (parent, args, context) => {
+    getRecipes: async (parent, args, context) => {
       if (!context.user) throw new AuthenticationError('You must be logged in');
-      return recipes.filter(recipe => recipe.userId === context.user.id);
+      return await Recipe.find({ userId: context.user.id });
     },
-    getRecipe: (parent, args, context) => {
+    getRecipe: async (parent, args, context) => {
       if (!context.user) throw new AuthenticationError('You must be logged in');
-      return recipes.find(recipe => recipe.id === args.id && recipe.userId === context.user.id);
+      return await Recipe.findOne({ _id: args.id, userId: context.user.id });
     },
   },
   Mutation: {
     register: async (parent, args) => {
       const { username, email, password } = args;
-      if (users.find(user => user.username === username)) {
+      if (await User.findOne({ username })) {
         throw new Error('Username already exists');
       }
-      if (users.find(user => user.email === email)) {
+      if (await User.findOne({ email })) {
         throw new Error('Email already exists');
       }
       const hashedPassword = await bcrypt.hash(password, 10);
-      const newUser = { id: `${users.length + 1}`, username, email, password: hashedPassword };
-      users.push(newUser);
-      fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
+      const newUser = new User({ username, email, password: hashedPassword });
+      await newUser.save();
       return newUser;
     },
-    login: (parent, args) => {
+    login: async (parent, args) => {
       const { username, password } = args;
-      const user = users.find(user => user.username === username);
+      const user = await User.findOne({ username });
       if (!user || !bcrypt.compareSync(password, user.password)) {
         throw new Error('Invalid credentials');
       }
-      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      const refreshToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      const refreshToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
       return { token, refreshToken };
     },
-    addRecipe: (parent, args, context) => {
+    addRecipe: async (parent, args, context) => {
       if (!context.user) throw new AuthenticationError('You must be logged in');
-      const newRecipe = { id: `${recipes.length + 1}`, ...args, userId: context.user.id };
-      recipes.push(newRecipe);
-      fs.writeFileSync(recipesFilePath, JSON.stringify(recipes, null, 2));
+      const newRecipe = new Recipe({ ...args, userId: context.user.id });
+      await newRecipe.save();
       return newRecipe;
     },
-    deleteRecipe: (parent, args, context) => {
+    deleteRecipe: async (parent, args, context) => {
       if (!context.user) throw new AuthenticationError('You must be logged in');
-      const index = recipes.findIndex(recipe => recipe.id === args.id && recipe.userId === context.user.id);
-      if (index === -1) {
+      const recipe = await Recipe.findOneAndDelete({ _id: args.id, userId: context.user.id });
+      if (!recipe) {
         throw new Error('Recipe not found or not authorized');
       }
-      recipes.splice(index, 1);
-      fs.writeFileSync(recipesFilePath, JSON.stringify(recipes, null, 2));
       return true;
     },
-    updateRecipe: (parent, args, context) => {
+    updateRecipe: async (parent, args, context) => {
       if (!context.user) throw new AuthenticationError('You must be logged in');
-      const index = recipes.findIndex(recipe => recipe.id === args.id && recipe.userId === context.user.id);
-      if (index === -1) {
+      const updatedRecipe = await Recipe.findOneAndUpdate(
+        { _id: args.id, userId: context.user.id },
+        { ...args },
+        { new: true }
+      );
+      if (!updatedRecipe) {
         throw new Error('Recipe not found or not authorized');
       }
-      const updatedRecipe = { ...recipes[index], ...args };
-      recipes[index] = updatedRecipe;
-      fs.writeFileSync(recipesFilePath, JSON.stringify(recipes, null, 2));
       return updatedRecipe;
     },
   },
@@ -132,12 +137,12 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => {
+  context: async ({ req }) => {
     const token = req.headers.authorization || '';
     if (token) {
       try {
         const decoded = jwt.verify(token.replace('Bearer ', ''), process.env.JWT_SECRET);
-        const user = users.find(user => user.id === decoded.userId);
+        const user = await User.findById(decoded.userId);
         if (!user) {
           throw new AuthenticationError('User not found');
         }
@@ -154,7 +159,7 @@ const app = express();
 app.use(cors()); // Add CORS configuration
 app.use(bodyParser.json());
 
-app.post('/refresh_token', (req, res) => {
+app.post('/refresh_token', async (req, res) => {
   const { refreshToken } = req.body;
   if (!refreshToken) {
     return res.sendStatus(401);
@@ -167,12 +172,12 @@ app.post('/refresh_token', (req, res) => {
     return res.sendStatus(401);
   }
 
-  const user = users.find(user => user.id === payload.userId);
+  const user = await User.findById(payload.userId);
   if (!user) {
     return res.sendStatus(401);
   }
 
-  const newToken = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  const newToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
   return res.json({ accessToken: newToken });
 });
 
